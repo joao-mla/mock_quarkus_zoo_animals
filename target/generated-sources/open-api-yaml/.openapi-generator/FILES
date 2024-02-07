@@ -1,0 +1,15 @@
+org/openapi/quarkus/api_yaml/api/AnimalsApi.java
+org/openapi/quarkus/api_yaml/api/EnclosureApi.java
+org/openapi/quarkus/api_yaml/api/LocationApi.java
+org/openapi/quarkus/api_yaml/api/SpeciesApi.java
+org/openapi/quarkus/api_yaml/model/AnimalCreationViewModel.java
+org/openapi/quarkus/api_yaml/model/AnimalViewModel.java
+org/openapi/quarkus/api_yaml/model/EnclosureAnimalViewModel.java
+org/openapi/quarkus/api_yaml/model/EnclosureCreationViewModel.java
+org/openapi/quarkus/api_yaml/model/EnclosureViewModel.java
+org/openapi/quarkus/api_yaml/model/SpaceCreationViewModel.java
+org/openapi/quarkus/api_yaml/model/SpaceViewModel.java
+org/openapi/quarkus/api_yaml/model/SpeciesCreationViewModel.java
+org/openapi/quarkus/api_yaml/model/SpeciesViewModel.java
+org/openapi/quarkus/api_yaml/model/ZoneCreationViewModel.java
+org/openapi/quarkus/api_yaml/model/ZoneViewModel.java

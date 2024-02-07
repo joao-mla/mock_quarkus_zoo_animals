@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+    database:
+        container_name: postgres
+        image: postgres:latest
+        restart: unless-stopped
+        environment:
+            POSTGRES_DB: zooquarkus
+            POSTGRES_USER: quarkus
+            POSTGRES_PASSWORD: quarkus
+        ports:
+            - "5434:5432"
+        networks:
+            - quarkus-network
+         
+    quarkus-app:
+        build:
+            dockerfile: Dockerfile.jvm
+        environment:
+            DB_USERNAME: quarkus
+            DB_PASSWORD: quarkus
+            DB_URL_REACTIVE: postgresql://database:5432/zooquarkus
+            DB_URL_JDBC: jdbc:postgresql://database:5432/zooquarkus
+            DB_SCHEMA: public
+        ports:
+            - "8080:8080"
+        depends_on:
+            - database
+        networks:
+            - quarkus-network
+
+networks:
+    quarkus-network:
+        external: false

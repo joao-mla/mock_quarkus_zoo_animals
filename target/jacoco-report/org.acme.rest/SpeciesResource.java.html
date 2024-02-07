@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SpeciesResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AnimalResourceTest (QuarkusTest)</a> &gt; <a href="index.source.html" class="el_package">org.acme.rest</a> &gt; <span class="el_source">SpeciesResource.java</span></div><h1>SpeciesResource.java</h1><pre class="source lang-java linenums">package org.acme.rest;
+
+import io.smallrye.mutiny.Uni;
+import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import lombok.RequiredArgsConstructor;
+import org.acme.maps.SpeciesMapper;
+import org.acme.persistence.enitities.Species;
+import org.acme.services.SpeciesService;
+import org.openapi.quarkus.api_yaml.api.SpeciesApi;
+import org.openapi.quarkus.api_yaml.model.SpeciesCreationViewModel;
+import org.openapi.quarkus.api_yaml.model.SpeciesViewModel;
+
+import java.util.List;
+import java.util.UUID;
+
+<span class="nc" id="L24">@RequiredArgsConstructor</span>
+public class SpeciesResource implements SpeciesApi {
+    private final SpeciesService speciesService;
+
+    private final SpeciesMapper speciesMapper;
+
+    @Override
+    public Uni&lt;Response&gt; createSpecies(SpeciesCreationViewModel speciesCreationViewModel) {
+<span class="nc" id="L32">        return privateCreateSpecies(speciesCreationViewModel)</span>
+<span class="nc" id="L33">                .map(saved -&gt; Response.ok(saved).status(Response.Status.CREATED).build());</span>
+    }
+
+    public Uni&lt;SpeciesViewModel&gt; privateCreateSpecies(SpeciesCreationViewModel speciesCreationViewModel) {
+<span class="nc" id="L37">        return Uni.createFrom().item(speciesMapper.map(speciesCreationViewModel))</span>
+<span class="nc" id="L38">                .flatMap(speciesService::create)</span>
+<span class="nc" id="L39">                .map(speciesMapper::mapToVm);</span>
+    }
+
+    @Override
+    public Uni&lt;Response&gt; getAllSpecies() {
+<span class="nc" id="L44">        return privateGetAllSpecies()</span>
+<span class="nc" id="L45">                .map(species -&gt; Response.ok(species).build());</span>
+    }
+
+    public Uni&lt;List&lt;SpeciesViewModel&gt;&gt; privateGetAllSpecies() {
+<span class="nc" id="L49">        return speciesService.getAll()</span>
+<span class="nc" id="L50">                .map(speciesMapper::mapToVm);</span>
+    }
+
+    @Override
+    public Uni&lt;Response&gt; getSingleSpecies(UUID id) {
+<span class="nc" id="L55">        return privateGetSpecies(id)</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">                .map(species -&gt; species != null ?</span>
+<span class="nc" id="L57">                        Response.ok(species)</span>
+<span class="nc" id="L58">                        : Response.status(Response.Status.NOT_FOUND))</span>
+<span class="nc" id="L59">                .map(Response.ResponseBuilder::build);</span>
+    }
+
+    public Uni&lt;SpeciesViewModel&gt; privateGetSpecies(UUID id) {
+<span class="nc" id="L63">        return speciesService.getSingle(id)</span>
+<span class="nc" id="L64">                .map(speciesMapper::mapToVm);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

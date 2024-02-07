@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LocationResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AnimalResourceTest (QuarkusTest)</a> &gt; <a href="index.source.html" class="el_package">org.acme.rest</a> &gt; <span class="el_source">LocationResource.java</span></div><h1>LocationResource.java</h1><pre class="source lang-java linenums">package org.acme.rest;
+
+import io.smallrye.mutiny.Uni;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.ws.rs.core.Response;
+import lombok.RequiredArgsConstructor;
+import org.acme.maps.SpaceMapper;
+import org.acme.maps.ZoneMapper;
+import org.acme.services.SpaceService;
+import org.acme.services.ZoneService;
+import org.openapi.quarkus.api_yaml.api.LocationApi;
+import org.openapi.quarkus.api_yaml.model.SpaceCreationViewModel;
+import org.openapi.quarkus.api_yaml.model.SpaceViewModel;
+import org.openapi.quarkus.api_yaml.model.ZoneCreationViewModel;
+import org.openapi.quarkus.api_yaml.model.ZoneViewModel;
+
+import java.util.List;
+import java.util.UUID;
+
+<span class="nc" id="L20">@RequiredArgsConstructor</span>
+public class LocationResource implements LocationApi {
+    private final SpaceService spaceService;
+    private final ZoneService zoneService;
+
+    private final ZoneMapper zoneMapper;
+    private final SpaceMapper spaceMapper;
+
+    @Override
+    public Uni&lt;Response&gt; createSpace(SpaceCreationViewModel spaceCreationViewModel) {
+<span class="nc" id="L30">        return privateCreateSpace(spaceCreationViewModel)</span>
+<span class="nc" id="L31">                .map(space -&gt;</span>
+<span class="nc" id="L32">                        Response.ok(space).status(Response.Status.CREATED).build());</span>
+    }
+
+    private Uni&lt;SpaceViewModel&gt; privateCreateSpace(SpaceCreationViewModel spaceCreationViewModel) {
+<span class="nc" id="L36">        return Uni.createFrom().item(spaceMapper.mapToDto(spaceCreationViewModel))</span>
+<span class="nc" id="L37">                .flatMap(spaceService::create)</span>
+<span class="nc" id="L38">                .map(spaceMapper::mapToVm);</span>
+    }
+
+    @Override
+    public Uni&lt;Response&gt; getAllSpaces() {
+<span class="nc" id="L43">        return privateGetAllSpaces()</span>
+<span class="nc" id="L44">                .map(list -&gt; Response.ok(list).build());</span>
+    }
+
+    private Uni&lt;List&lt;SpaceViewModel&gt;&gt; privateGetAllSpaces() {
+<span class="nc" id="L48">        return spaceService.getAll()</span>
+<span class="nc" id="L49">                .map(spaceMapper::mapToVm);</span>
+    }
+
+    @Override
+    public Uni&lt;Response&gt; getSingleSpace(UUID id) {
+<span class="nc" id="L54">        return privateGetSingleSpace(id)</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">                .map(space -&gt; space == null ?</span>
+<span class="nc" id="L56">                        Response.ok(null).status(Response.Status.NOT_FOUND)</span>
+<span class="nc" id="L57">                        : Response.ok(space).status(Response.Status.FOUND))</span>
+<span class="nc" id="L58">                .map(Response.ResponseBuilder::build);</span>
+    }
+
+    private Uni&lt;SpaceViewModel&gt; privateGetSingleSpace(UUID id) {
+<span class="nc" id="L62">        return spaceService.getSingle(id)</span>
+<span class="nc" id="L63">                .map(spaceMapper::mapToVm);</span>
+    }
+
+    @Override
+    public Uni&lt;Response&gt; createZone(ZoneCreationViewModel zoneCreationViewModel) {
+<span class="nc" id="L68">        return privateCreateZone(zoneCreationViewModel)</span>
+<span class="nc" id="L69">                .map(created -&gt;</span>
+<span class="nc" id="L70">                        Response.ok(created).status(Response.Status.CREATED).build());</span>
+    }
+
+    private Uni&lt;ZoneViewModel&gt; privateCreateZone(ZoneCreationViewModel zoneCreationViewModel) {
+<span class="nc" id="L74">        return Uni.createFrom().item(zoneMapper.mapToDto(zoneCreationViewModel))</span>
+<span class="nc" id="L75">                .flatMap(zoneService::create)</span>
+<span class="nc" id="L76">                .map(zoneMapper::mapToVm);</span>
+    }
+
+    @Override
+    public Uni&lt;Response&gt; getAllZones() {
+<span class="nc" id="L81">        return privateGetAllZones()</span>
+<span class="nc" id="L82">                .map(zones -&gt;</span>
+<span class="nc" id="L83">                        Response.ok(zones).build());</span>
+    }
+
+    private Uni&lt;List&lt;ZoneViewModel&gt;&gt; privateGetAllZones() {
+<span class="nc" id="L87">        return zoneService.getAll()</span>
+<span class="nc" id="L88">                .map(zoneMapper::mapToVm);</span>
+    }
+
+    @Override
+    public Uni&lt;Response&gt; getSingleZone(UUID id) {
+<span class="nc" id="L93">        return privateGetSingleZone(id)</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">                .map(zone -&gt; zone == null ?</span>
+<span class="nc" id="L95">                        Response.ok().status(Response.Status.NOT_FOUND)</span>
+<span class="nc" id="L96">                        : Response.ok(zone).status(Response.Status.FOUND))</span>
+<span class="nc" id="L97">                .map(Response.ResponseBuilder::build);</span>
+    }
+
+    private Uni&lt;ZoneViewModel&gt; privateGetSingleZone(UUID id) {
+<span class="nc" id="L101">        return zoneService.getSingleZone(id)</span>
+<span class="nc" id="L102">                .map(zoneMapper::mapToVm);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,11 @@
+
+X
+java:S1128";Remove this unused import 'jakarta.persistence.JoinColumn'.(İçÆ•8÷¹¬›Ø1
+\
+java:S1128":Remove this unused import 'jakarta.persistence.ManyToOne'.(áîÖãùÿÿÿÿ8ø¹¬›Ø1
+\
+java:S1128":Remove this unused import 'jakarta.persistence.OneToMany'.( ëîéúÿÿÿÿ8ø¹¬›Ø1
+d
+java:S1128"BRemove this unused import 'org.acme.persistence.enitities.Animal'.(ÄÊ¯¢ùÿÿÿÿ8ø¹¬›Ø1
+^
+java:S1128	"ARemove this unused import 'org.acme.persistence.enitities.Space'.(¸“‚º8ø¹¬›Ø1

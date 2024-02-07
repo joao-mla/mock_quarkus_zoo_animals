@@ -1,0 +1,452 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: ZooQuarkus Service API
+  description: ZooQuarkus Service API
+tags:
+  - name: animals
+    description: Animals Service API
+  - name: species
+    description: Species Service API
+  - name: location
+    description: Location Service API
+  - name: enclosure
+    description: Enclosure Service API
+paths:
+  /v1/animals:
+    get:
+      tags:
+        - animals
+      summary: Get all animals
+      description: Get all animals
+      operationId: getAllAnimals
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Animal'
+    post:
+      tags:
+        - animals
+      summary: Create an animal
+      description: Create an animal
+      operationId: createAnimal
+      requestBody:
+        description: Animal information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnimalCreation'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Animal'
+  /v1/animals/{id}:
+    get:
+      tags:
+        - animals
+      summary: Get animal
+      description: Get animal
+      operationId: getSingleAnimal
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Animal'
+  /v1/species:
+    get:
+      tags:
+        - species
+      summary: Get all species
+      description: Get all species
+      operationId: getAllSpecies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Species'
+    post:
+      tags:
+        - species
+      summary: Create a species
+      description: Create a species
+      operationId: createSpecies
+      requestBody:
+        description: Species information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpeciesCreation'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Species'
+  /v1/species/{id}:
+    get:
+      tags:
+        - species
+      summary: Get species
+      description: Get species
+      operationId: getSingleSpecies
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Species'
+  /v1/enclosures:
+    get:
+      tags:
+        - enclosure
+      summary: Get all enclosures
+      description: Get all enclosures
+      operationId: getAllEnclosures
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Enclosure'
+    post:
+      tags:
+        - enclosure
+      summary: Create an enclosure
+      description: Create an enclosure
+      operationId: createEnclosure
+      requestBody:
+        description: Enclosure information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnclosureCreation'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Enclosure'
+  /v1/enclosures/{id}:
+    get:
+      tags:
+        - enclosure
+      summary: Get enclosure
+      description: Get enclosure
+      operationId: getSingleEnclosure
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Enclosure'
+  /v1/spaces:
+    get:
+      tags:
+        - location
+      summary: Get all spaces
+      description: Get all spaces
+      operationId: getAllSpaces
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Space'
+    post:
+      tags:
+        - location
+      summary: Create a space
+      description: Create a space
+      operationId: createSpace
+      requestBody:
+        description: Space information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpaceCreation'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Space'
+  /v1/spaces/{id}:
+    get:
+      tags:
+        - location
+      summary: Get space
+      description: Get space
+      operationId: getSingleSpace
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Space'
+  /v1/zones:
+    get:
+      tags:
+        - location
+      summary: Get all zones
+      description: Get all zones
+      operationId: getAllZones
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Zone'
+    post:
+      tags:
+        - location
+      summary: Create a zone
+      description: Create a zone
+      operationId: createZone
+      requestBody:
+        description: Zone information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ZoneCreation'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Zone'
+  /v1/zones/{id}:
+    get:
+      tags:
+        - location
+      summary: Get zone
+      description: Get zone
+      operationId: getSingleZone
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Zone'
+  /v1/enclosures/{id}/zookeepers:
+    get:
+      tags:
+        - enclosure
+      summary: Get enclosure's zookeepers
+      description: Get enclosure's zookeepers
+      operationId: getEnclosureZookeepers
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The enclosure ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+components:
+  schemas:
+    Enclosure:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Enclosure ID
+        name:
+          type: string
+          description: Enclosure name
+        space:
+          $ref: '#/components/schemas/Space'
+        animals:
+          type: array
+          items:
+            $ref: '#/components/schemas/Animal'
+    EnclosureCreation:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Enclosure name
+        space:
+          type: string
+          format: uuid
+          description: Space UUID
+    EnclosureAnimal:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Enclosure ID
+        name:
+          type: string
+          description: Enclosure name
+    Animal:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        species:
+          type: string
+        enclosure:
+          $ref: '#/components/schemas/EnclosureAnimal'
+    AnimalCreation:
+      type: object
+      properties:
+        name:
+          type: string
+        species:
+          type: string
+          format: uuid
+        enclosure:
+          type: string
+          format: uuid
+    Zone:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        internalCode:
+          type: string
+    ZoneCreation:
+      type: object
+      properties:
+        name:
+          type: string
+        internalCode:
+          type: string
+    Space:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        internalCode:
+          type: string
+    SpaceCreation:
+      type: object
+      properties:
+        name:
+          type: string
+        internalCode:
+          type: string
+    Species:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+    SpeciesCreation:
+      type: object
+      properties:
+        name:
+          type: string

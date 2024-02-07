@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SpaceService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AnimalResourceTest (QuarkusTest)</a> &gt; <a href="index.source.html" class="el_package">org.acme.services</a> &gt; <span class="el_source">SpaceService.java</span></div><h1>SpaceService.java</h1><pre class="source lang-java linenums">package org.acme.services;
+
+import io.quarkus.hibernate.reactive.panache.Panache;
+import io.quarkus.panache.common.Sort;
+import io.smallrye.mutiny.Uni;
+import jakarta.enterprise.context.ApplicationScoped;
+import lombok.RequiredArgsConstructor;
+import org.acme.dtos.SpaceDto;
+import org.acme.maps.SpaceMapper;
+import org.acme.persistence.enitities.Animal;
+import org.acme.persistence.enitities.Space;
+import org.acme.persistence.repositories.SpaceRepository;
+
+import java.util.List;
+import java.util.UUID;
+
+@ApplicationScoped
+<span class="nc" id="L18">@RequiredArgsConstructor</span>
+public class SpaceService {
+    private final SpaceRepository spaceRepository;
+
+    private final SpaceMapper spaceMapper;
+
+    public Uni&lt;SpaceDto&gt; getSingle(UUID id) {
+<span class="nc" id="L25">        return spaceRepository.findById(id)</span>
+<span class="nc" id="L26">                .map(spaceMapper::mapToDto);</span>
+    }
+
+    public Uni&lt;SpaceDto&gt; create(SpaceDto space) {
+<span class="nc" id="L30">        return Uni.createFrom().item(spaceMapper.map(space))</span>
+<span class="nc" id="L31">                .flatMap(space1 -&gt; Panache</span>
+<span class="nc" id="L32">                        .withTransaction(() -&gt; spaceRepository.persist(space1)))</span>
+<span class="nc" id="L33">                .map(spaceMapper::mapToDto);</span>
+    }
+
+    public Uni&lt;List&lt;SpaceDto&gt;&gt; getAll() {
+<span class="nc" id="L37">        return spaceRepository.listAll(Sort.by(&quot;name&quot;))</span>
+<span class="nc" id="L38">                .map(spaceMapper::mapToDto);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

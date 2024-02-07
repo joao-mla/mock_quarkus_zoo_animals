@@ -1,0 +1,20 @@
+
+d
+java:S1128"BRemove this unused import 'jakarta.annotation.security.PermitAll'.(‡Ñøÿÿÿÿ8‘ëˆÌÖ1
+g
+java:S1128"ERemove this unused import 'jakarta.annotation.security.RolesAllowed'.(ŠÌêÿÿÿÿÿ8„ƒ‰ÌÖ1
+U
+java:S1128"3Remove this unused import 'jakarta.ws.rs.Consumes'.(¡–Îüÿÿÿÿ8¯°ÙĞÕ1
+K
+java:S1128".Remove this unused import 'jakarta.ws.rs.GET'.(øŞ·ï8°°ÙĞÕ1
+K
+java:S1128"/Remove this unused import 'jakarta.ws.rs.POST'.(ŞÎÌ8°°ÙĞÕ1
+Q
+java:S1128	"/Remove this unused import 'jakarta.ws.rs.Path'.(·Ñé‚úÿÿÿÿ8ïÄÒÕ1
+U
+java:S1128
+"3Remove this unused import 'jakarta.ws.rs.Produces'.(ÍşŸÄûÿÿÿÿ8°°ÙĞÕ1
+V
+java:S1128"9Remove this unused import 'jakarta.ws.rs.core.MediaType'.(¦ø§ö8±°ÙĞÕ1
+e
+java:S1128"CRemove this unused import 'org.acme.persistence.enitities.Species'.(æ¹šÿÿÿÿÿ8±°ÙĞÕ1
