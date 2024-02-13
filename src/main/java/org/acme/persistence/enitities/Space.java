@@ -13,7 +13,7 @@ import lombok.Setter;
 import java.util.UUID;
 
 @Entity
-@Table(name = "space", schema = "animal-service")
+@Table(name = "space")
 @Getter
 @Setter
 public class Space {

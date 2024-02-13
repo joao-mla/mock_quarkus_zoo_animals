@@ -12,7 +12,7 @@ import lombok.Setter;
 import java.util.UUID;
 
 @Entity
-@Table(name = "zone", schema = "animal-service")
+@Table(name = "zone")
 @Getter
 @Setter
 public class Zone {

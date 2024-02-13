@@ -97,3 +97,10 @@ m
 =src/main/java/org/acme/api/hr/viewmodels/PersonViewModel.java,1\6\16315495cb78de1a2ac2091c0bbfd1fcf7efe208
 j
 :src/main/java/org/acme/api/hr/rest/HRZookeeperService.java,5\9\593c9bea0bb1b68027f7ccef74f4b5f7d6d692f1
+N
+src/main/docker/Dockerfile.jvm,6\1\6114331286b7e0a3b0b110e87eb46921b6460357
+7
+dev.env,b\9\b99ebd45d06e2b92ec0b14fc488166fbabb91243
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302

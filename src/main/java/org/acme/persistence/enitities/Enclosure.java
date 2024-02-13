@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "enclosure", schema = "animal-service")
+@Table(name = "enclosure")
 @Getter
 @Setter
 public class Enclosure {

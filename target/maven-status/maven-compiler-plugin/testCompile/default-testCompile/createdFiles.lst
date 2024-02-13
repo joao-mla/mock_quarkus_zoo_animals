@@ -1,7 +1,0 @@
-utils\fixtures\ZoneFixture.class
-utils\fixtures\EnclosureFixture.class
-utils\fixtures\AnimalFixture.class
-utils\fixtures\SpaceFixture.class
-utils\fixtures\SpeciesFixture.class
-org\acme\rest\AnimalResourceTest.class
-org\acme\rest\EnclosureResourceTest.class

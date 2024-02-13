@@ -6,23 +6,23 @@ services:
         image: postgres:latest
         restart: unless-stopped
         environment:
-            POSTGRES_DB: zooquarkus
-            POSTGRES_USER: quarkus
-            POSTGRES_PASSWORD: quarkus
+            POSTGRES_DB: quarkus_db
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
         ports:
-            - "5434:5432"
+            - "8081:5432"
         networks:
             - quarkus-network
          
     quarkus-app:
         build:
-            dockerfile: Dockerfile.jvm
+            dockerfile: Dockerfile.native
         environment:
-            DB_USERNAME: quarkus
-            DB_PASSWORD: quarkus
-            DB_URL_REACTIVE: postgresql://database:5432/zooquarkus
-            DB_URL_JDBC: jdbc:postgresql://database:5432/zooquarkus
-            DB_SCHEMA: public
+            DB_SOURCE: database
+            DB_PORT: 5432
+            DB_NAME: quarkus_db
+            DB_USER: postgres
+            DB_PASS: postgres
         ports:
             - "8080:8080"
         depends_on:
@@ -32,4 +32,5 @@ services:
 
 networks:
     quarkus-network:
+        driver: bridge
         external: false
